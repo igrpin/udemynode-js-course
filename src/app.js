@@ -21,7 +21,7 @@ hbs.registerPartials(partialsPath);
 // Setup static directory to serve
 app.use(express.static(publicDirectoryPath));
 
-const creator = 'Igor';
+const creator = 'Igr';
 
 app.get('', (req, res) => {
   res.render('index', {
