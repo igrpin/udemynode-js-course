@@ -6,33 +6,30 @@
 //             console.log(data.forecast)
 //             console.log(data.location)
 //         }
-        
 //     })
 // })
 
-const weatherForm = document.querySelector('form')
-const search = document.querySelector('input')
-const messageOne = document.querySelector('#message-1')
-const messageTwo = document.querySelector('#message-2')
+const weatherForm = document.querySelector('form');
+const search = document.querySelector('input');
+const messageOne = document.querySelector('#message-1');
+const messageTwo = document.querySelector('#message-2');
 
 weatherForm.addEventListener('submit', (event) => {
-    event.preventDefault()
-    const location = search.value;
+  event.preventDefault();
+  const location = search.value;
 
-    messageOne.textContent = 'Loading...'
-    messageTwo.textContent = ''
+  messageOne.textContent = 'Loading...';
+  messageTwo.textContent = '';
 
-    fetch('/weather?address='+location).then((response) => {
+  fetch(`/weather?address=${location}`).then((response) => {
     response.json().then((data) => {
-        if (data.error) {
-            messageOne.textContent = data.error
-            messageTwo.textContent = ''
-        } else {
-            messageOne.textContent = data.forecast.summary
-            messageTwo.textContent = data.location
-        }
-        
-    })
-})
-    
-})
+      if (data.error) {
+        messageOne.textContent = data.error;
+        messageTwo.textContent = '';
+      } else {
+        messageOne.textContent = `${data.forecast.temp}º. ${data.forecast.summary}, Probabilidade de chuva: ${data.forecast.precipProbability}`;
+        messageTwo.textContent = data.location;
+      }
+    });
+  });
+});

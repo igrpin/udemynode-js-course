@@ -1,4 +1,4 @@
-const request = require('request')
+const request = require('request');
 
 // const forecast = (lat, long, callback) => {
 //     const url = 'https://api.darksky.net/forecast/c3141137257a63e4af02e0a685691f83/'+lat+','+long+'?units=si&lang=pt'
@@ -20,21 +20,21 @@ const request = require('request')
 // Using Objects Shorthand syntax and Destructuring pattern
 
 const forecast = (lat, long, callback) => {
-    const url = 'https://api.darksky.net/forecast/c3141137257a63e4af02e0a685691f83/'+lat+','+long+'?units=si&lang=pt'
-    request({url, json: true}, (error, { body }) => {
-        if (error){
-            callback('Unable to connect to weather service!', undefined)
-        } else if (body.error) {
-            callback('Unable to find location. Try again.', undefined)
-        } else {
-            callback(undefined, {
-                temp: body.currently.temperature,
-                summary: body.currently.summary,
-                precipProbability: body.currently.precipProbability,
-                body: body
-            })
-        }
-    })
-}
+  const url = `https://api.darksky.net/forecast/c3141137257a63e4af02e0a685691f83/${lat},${long}?units=si&lang=pt`;
+  request({ url, json: true }, (error, { body }) => {
+    if (error) {
+      callback('Unable to connect to weather service!', undefined);
+    } else if (body.error) {
+      callback('Unable to find location. Try again.', undefined);
+    } else {
+      callback(undefined, {
+        temp: body.currently.temperature,
+        summary: body.currently.summary,
+        precipProbability: body.currently.precipProbability,
+        body,
+      });
+    }
+  });
+};
 
-module.exports = forecast
+module.exports = forecast;
