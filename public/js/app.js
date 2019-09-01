@@ -27,7 +27,7 @@ weatherForm.addEventListener('submit', (event) => {
         messageOne.textContent = data.error;
         messageTwo.textContent = '';
       } else {
-        messageOne.textContent = `Temperatura atual: ${data.forecast.temp}º. ${data.forecast.summary}, Probabilidade de chuva: ${data.forecast.precipProbability}%`;
+        messageOne.textContent = data.forecast;
         messageTwo.textContent = data.location;
       }
     });

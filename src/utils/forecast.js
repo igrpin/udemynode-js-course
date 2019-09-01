@@ -27,12 +27,8 @@ const forecast = (lat, long, callback) => {
     } else if (body.error) {
       callback('Unable to find location. Try again.', undefined);
     } else {
-      callback(undefined, {
-        temp: body.currently.temperature,
-        summary: body.currently.summary,
-        precipProbability: body.currently.precipProbability,
-        body,
-      });
+      callback(undefined, `${body.daily.summary} It's currently ${body.currently.temperature}º, com máxima de 
+        ${body.daily.data[0].temperatureHigh}º e mínima de ${body.daily.data[0].temperatureLow}º`);
     }
   });
 };
